@@ -178,6 +178,9 @@ public class TaskTransfer {
             targetQueue = exeQueue;
         }
 
+        /**
+         * 反压机制
+         * */
         if (isBackpressureEnable) {
             Boolean backpressureStatus = targetTaskBackpressureStatus.get(taskId);
             if (backpressureStatus == null) {

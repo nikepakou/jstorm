@@ -433,7 +433,7 @@
 
 ## Bug fix
 1. Fix disruptor use too much cpu
-2. Add target NettyServer log when f1ail to send data by netty
+2. Add target NettyServer log when fail to send data by netty
 
 # Release 0.9.4.1
 

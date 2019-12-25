@@ -179,7 +179,7 @@ class NettyServer implements IConnection {
 
     /**
      * enqueue a received message
-     * 
+     * 将消息根据消息类型以及消息所属的taskId推入相应的队列
      * @param message
      * @throws InterruptedException
      */

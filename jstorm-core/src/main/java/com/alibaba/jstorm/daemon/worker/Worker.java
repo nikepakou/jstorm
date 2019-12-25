@@ -151,6 +151,9 @@ public class Worker {
         JStormMetrics.registerWorkerMetric(JStormMetrics.workerMetricName(MetricDef.RECV_CTRL_QUEUE, MetricType.GAUGE), new AsmGauge(
                 revCtrlGauge));
 
+        /**
+         * 接受消息的网络连接？连接服务器，服务器是谁？ 反序列化之后放到控制队列中
+         * */
         IConnection recvConnection = context.bind(topologyId, workerData.getPort(), workerData.getDeserializeQueues(),
                 recvControlQueue, false, workerData.getTaskids());
         workerData.setRecvConnection(recvConnection);
@@ -162,6 +165,9 @@ public class Worker {
         return new AsyncLoopThread(recvControlDispather, false, Thread.MAX_PRIORITY, true);
     }
 
+    /**
+     * worker 主要工作
+     * */
     public WorkerShutdown execute() throws Exception {
         List<AsyncLoopThread> threads = new ArrayList<>();
 

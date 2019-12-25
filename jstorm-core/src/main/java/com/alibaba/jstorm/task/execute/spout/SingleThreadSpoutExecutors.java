@@ -45,6 +45,7 @@ public class SingleThreadSpoutExecutors extends SpoutExecutors {
     @Override
     public void mkPending() {
     	// sending Tuple's TimeCacheMap
+        // task.batch.tuple默认为 true
         if (ConfigExtension.isTaskBatchTuple(storm_conf)) {
             pending = new RotatingMap<Long, TupleInfo>(Acker.TIMEOUT_BUCKET_NUM, null, false);
         }else {

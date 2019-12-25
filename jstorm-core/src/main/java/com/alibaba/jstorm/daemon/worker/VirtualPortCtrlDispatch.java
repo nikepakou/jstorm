@@ -44,6 +44,9 @@ import com.alibaba.jstorm.utils.DisruptorRunable;
 public class VirtualPortCtrlDispatch extends DisruptorRunable {
     private final static Logger LOG = LoggerFactory.getLogger(VirtualPortCtrlDispatch.class);
 
+    /**
+     * taskid -> DisruptorQueue
+     */
     protected ConcurrentHashMap<Integer, DisruptorQueue> controlQueues;
     protected IConnection recvConnection;
     protected AtomicReference<KryoTupleDeserializer> atomKryoDeserializer;

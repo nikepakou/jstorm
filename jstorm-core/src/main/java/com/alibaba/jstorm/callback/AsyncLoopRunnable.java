@@ -36,7 +36,7 @@ public class AsyncLoopRunnable implements Runnable {
 
     /**
      * set shutdown as false is to
-     * 记录关闭命令
+     * 记录关闭信号
      */
     private static AtomicBoolean shutdown = new AtomicBoolean(false);
 

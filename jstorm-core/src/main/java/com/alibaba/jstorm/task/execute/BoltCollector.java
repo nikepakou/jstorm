@@ -217,6 +217,11 @@ public class BoltCollector extends OutputCollectorCb {
         taskTransfer.transferControl(tupleExt);
     }
 
+    /**
+     * sendCtrlMsg
+     * 1、什么情况下会执行sendCtrlMsg
+     * 2、
+     * */
     protected List<Integer> sendCtrlMsg(String out_stream_id, List<Object> values, Collection<Tuple> anchors, Integer out_task_id) {
         final long start = emitTimer.getTime();
         java.util.List<Integer> out_tasks = null;
@@ -234,6 +239,9 @@ public class BoltCollector extends OutputCollectorCb {
 
                 TupleImplExt tp = new TupleImplExt(topologyContext, values, task_id, out_stream_id, msgid);
                 tp.setTargetTaskId(t);
+                /**
+                 * 发送到控制队列
+                 * */
                 transferCtr(tp);
             }
         } catch (Exception e) {

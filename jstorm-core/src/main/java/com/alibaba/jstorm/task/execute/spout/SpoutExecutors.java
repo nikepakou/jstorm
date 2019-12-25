@@ -99,6 +99,10 @@ public class SpoutExecutors extends BaseExecutors implements EventHandler {
 
         this.spout = (ISpout) task.getTaskObj();
 
+        /**
+         topology.acker.executors !=0 则 max_spout_pending 配置生效
+         对于ack的流，可以加一个pending的长度监控
+         */
         int ackerNum = JStormUtils.parseInt(storm_conf.get(Config.TOPOLOGY_ACKER_EXECUTORS));
         if (ackerNum != 0){
             this.max_spout_pending = JStormUtils.parseInt(storm_conf.get(Config.TOPOLOGY_MAX_SPOUT_PENDING));

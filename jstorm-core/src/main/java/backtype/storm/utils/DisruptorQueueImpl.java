@@ -221,12 +221,12 @@ public class DisruptorQueueImpl extends DisruptorQueue {
             try {
                 if (isSync) {
                     final long nextSequence = _consumer.get() + 1;
-                    final long availableSequence = _barrier.waitFor(nextSequence);
+                    final long availableSequence = _barrier.waitFor(nextSequence); //throws InterruptedException
                     if (availableSequence >= nextSequence) {
                         consumeBatchToCursor(availableSequence, handler);
                     }
                 } else {
-                    List<Object> batch = retreiveAvailableBatch();
+                    List<Object> batch = retreiveAvailableBatch(); //throws InterruptedException
                     if (batch.size() > 0) {
                         for (int i = 0; i < batch.size(); i++) {
                             try {

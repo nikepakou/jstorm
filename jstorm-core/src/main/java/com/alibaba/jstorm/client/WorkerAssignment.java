@@ -144,6 +144,9 @@ public class WorkerAssignment extends WorkerSlot implements Serializable, JSONAw
         return Utils.to_json(map);
     }
 
+    /**
+     * 是怎么给worker分配任务的？
+     * */
     public static WorkerAssignment parseFromObj(Object obj) {
         if (obj == null) {
             return null;

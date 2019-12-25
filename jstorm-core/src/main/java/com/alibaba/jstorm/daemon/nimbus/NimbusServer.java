@@ -58,12 +58,15 @@ import backtype.storm.scheduler.INimbus;
 import backtype.storm.utils.Utils;
 
 /**
- * NimbusServer work flow: 1. cleanup interrupted topology delete /storm-local-dir/nimbus/topologyid/stormdis delete /storm-zk-root/storms/topologyid
+ * NimbusServer work flow:
+ * 1. cleanup interrupted topology delete /storm-local-dir/nimbus/topologyid/stormdis delete /storm-zk-root/storms/topologyid
  *
  * 2. set /storm-zk-root/storms/topology stats as run
  *
- * 3. start one thread, every nimbus.monitor.reeq.secs set /storm-zk-root/storms/ all topology as monitor. when the topology's status is monitor, nimubs would
- * reassign workers 4. start one threa, every nimubs.cleanup.inbox.freq.secs cleanup useless jar
+ * 3. start one thread, every nimbus.monitor.reeq.secs set /storm-zk-root/storms/ all topology as monitor.
+ * when the topology's status is monitor, nimubs would reassign workers
+ *
+ * 4. start one thread, every nimubs.cleanup.inbox.freq.secs cleanup useless jar
  *
  * @author version 1: Nathan Marz version 2: Lixin/Chenjun version 3: Longda
  */

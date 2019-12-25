@@ -68,6 +68,9 @@ public class MultiProducerSequencer extends AbstractSequencerExt {
         return hasAvailableCapacity(gatingSequences, requiredCapacity, cursor.get());
     }
 
+    /**
+     * 是否有可用的空间
+     * */
     private boolean hasAvailableCapacity(Sequence[] gatingSequences, final int requiredCapacity, long cursorValue) {
         long wrapPoint = (cursorValue + requiredCapacity) - bufferSize;
         long cachedGatingSequence = gatingSequenceCache.get();

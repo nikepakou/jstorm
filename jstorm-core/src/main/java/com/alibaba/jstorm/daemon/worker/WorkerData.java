@@ -412,21 +412,26 @@ public class WorkerData {
         int minPoolSize = taskids.size() > 5 ? 5 : taskids.size();
         int maxPoolSize = 2 * taskids.size();
 
-        threadPool = Executors.newScheduledThreadPool(THREAD_POOL_NUM);
+        /**
+         * 这个线城池是用来做什么的？
+         * */
+        threadPool = Executors.newScheduledThreadPool(THREAD_POOL_NUM); //THREAD_POOL_NUM=4
         TimerTrigger.setScheduledExecutorService(threadPool);
 
         if (ConfigExtension.getWorkerFlushPoolMinSize(stormConf) != null) {
-            minPoolSize = ConfigExtension.getWorkerFlushPoolMinSize(stormConf);
+            minPoolSize = ConfigExtension.getWorkerFlushPoolMinSize(stormConf);  //最小是5
         }
         if (ConfigExtension.getWorkerFlushPoolMaxSize(stormConf) != null) {
-            maxPoolSize = ConfigExtension.getWorkerFlushPoolMaxSize(stormConf);
+            maxPoolSize = ConfigExtension.getWorkerFlushPoolMaxSize(stormConf);  //最大是task数的2倍
         }
         if (minPoolSize > maxPoolSize) {
             LOG.error("Irrational flusher pool parameter configuration");
         }
+        //flusherPool作用是什么？
         flusherPool = new FlusherPool(minPoolSize, maxPoolSize, 30, TimeUnit.SECONDS);
         Flusher.setFlusherPool(flusherPool);
 
+        //如果非本地心跳线程，则创建healthReporterThread
         if (!StormConfig.local_mode(stormConf)) {
             healthReporterThread = new AsyncLoopThread(new JStormHealthReporter(this));
         }
