@@ -90,10 +90,11 @@ public class NimbusServer {
 
     public static void main(String[] args) throws Exception {
 
+        //崩溃检测；通过明确设置未捕获到的异常处理程序，线程可以完全控制它对未捕获到的异常作出响应的方式。
         Thread.setDefaultUncaughtExceptionHandler(new DefaultUncaughtExceptionHandler());
 
         // read configuration files
-        @SuppressWarnings("rawtypes")
+        //@SuppressWarnings("rawtypes") //用于抑制编译器产生警告信息
         Map config = Utils.readStormConfig();
 
         JStormServerUtils.startTaobaoJvmMonitor();
@@ -103,7 +104,6 @@ public class NimbusServer {
         INimbus iNimbus = new DefaultInimbus();
 
         instance.launchServer(config, iNimbus);
-
     }
 
     private void createPid(Map conf) throws Exception {
